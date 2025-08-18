@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comercializadora Infinito ∞</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin:0;
+      padding:0;
+      background:#e2c8a2;
+      color:#333;
+    }
+    header.galaxy-header {
+      position: relative;
+      text-align: center;
+      padding: 20px;
+      background: radial-gradient(ellipse at top,
+        #2d1f55 0%, #982f52 35%, #c75632 70%, transparent 100%);
+      overflow: hidden;
+      color:white;
+    }
+    header.galaxy-header::before {
+      content:"";
+      position:absolute; inset:0;
+      background-image:
+        radial-gradient(#fff 1px, transparent 1px),
+        radial-gradient(#fff 2px, transparent 2px);
+      background-size: 60px 60px, 120px 120px;
+      opacity:.25;
+    }
+    header.galaxy-header img {
+      height:180px;
+      width:auto;
+      position: relative;
+      z-index: 5;
+      animation: softDrop .9s ease-out both, glowPulse 2s infinite ease-in-out;
+      mix-blend-mode: lighten;
+      filter: drop-shadow(0 0 8px rgba(255,255,255,0.9))
+              drop-shadow(0 0 15px rgba(200,80,120,0.8));
+    }
+    @keyframes softDrop {
+      0% {opacity:0; transform:translateY(-14px); filter:blur(8px);}
+      100%{opacity:1; transform:translateY(0); filter:blur(0);}
+    }
+    @keyframes glowPulse {
+      0%, 100% {
+        filter: drop-shadow(0 0 8px rgba(255,255,255,0.7))
+                drop-shadow(0 0 15px rgba(200,80,120,0.7));
+      }
+      50% {
+        filter: drop-shadow(0 0 16px rgba(255,255,255,1))
+                drop-shadow(0 0 25px rgba(200,80,120,1));
+      }
+    }
+    nav {
+      background:#2d1f55;
+      padding:10px;
+      text-align:center;
+    }
+    nav a {
+      color:white;
+      text-decoration:none;
+      margin:0 15px;
+      font-weight:bold;
+    }
+    .hero {
+      text-align:center;
+      padding:30px;
+      background:white;
+    }
+    .hero h1 { color:#2d1f55; }
+
+    /* Carrusel productos */
+    .productos-container {
+      position: relative;
+      background:white;
+      padding: 20px 0;
+      overflow:hidden;
+    }
+    .productos {
+      display:flex;
+      gap:20px;
+      animation: scrollProductos 25s linear infinite;
+    }
+    .productos-container:hover .productos {
+      animation-play-state: paused;
+    }
+    .producto {
+      flex: 0 0 auto;
+      width:180px;
+      background:white;
+      padding:15px;
+      text-align:center;
+      border-radius:8px;
+      box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    }
+    .producto img {
+      max-width:100%;
+      height:140px;
+      object-fit:contain;
+    }
+    @keyframes scrollProductos {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Catálogos + marcas */
+    .catalogos {
+      padding:20px;
+      background:white;
+      text-align:center;
+      position: relative;
+      overflow:hidden;
+    }
+    .catalogo-btn {
+      display:inline-block;
+      margin:20px 0;
+      padding:14px 22px;
+      background: linear-gradient(90deg,#982f52,#c75632);
+      color:#fff;
+      text-decoration:none;
+      font-weight:800;
+      border-radius:999px;
+      box-shadow:0 6px 16px rgba(152,47,82,.25);
+      transition:transform .15s ease, box-shadow .15s ease;
+    }
+    .catalogo-btn:hover {
+      transform: translateY(-1px);
+      box-shadow:0 10px 24px rgba(152,47,82,.35);
+    }
+
+    .marcas {
+      margin-top:30px;
+      white-space:nowrap;
+      overflow:hidden;
+      box-sizing:border-box;
+      position: relative;
+    }
+    .marcas .track {
+      display:inline-flex;
+      gap:40px;
+      animation: scroll 25s linear infinite;
+      opacity:0.7;
+    }
+    .marcas img {
+      height:50px;
+      filter: grayscale(20%);
+    }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Construcción */
+    .construccion {
+      text-align:center;
+      background:#fff7e6;
+      padding:30px;
+      font-size:20px;
+      font-weight:bold;
+      color:#c75632;
+    }
+
+    footer {
+      background:#2d1f55;
+      color:white;
+      text-align:center;
+      padding:15px;
+      margin-top:0;
+    }
+
+    /* Botón flotante WhatsApp */
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 100;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      background-color: #20b954;
+    }
+    .whatsapp-float svg {
+      width: 32px;
+      height: 32px;
+      fill: white;
+    }
+
+    /* Botón flotante "Subir" */
+    .top-float {
+      position: fixed;
+      width: 50px;
+      height: 50px;
+      bottom: 90px;
+      right: 25px;
+      background-color: #2d1f55;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      cursor: pointer;
+      z-index: 100;
+      transition: transform 0.2s ease;
+    }
+    .top-float:hover {
+      transform: scale(1.1);
+      background-color: #482f85;
+    }
+
+    /* CTA cotiza ahora */
+    .cta-cotiza {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: linear-gradient(90deg,#982f52,#c75632);
+      color:white;
+      font-weight:bold;
+      padding:12px 18px;
+      border-radius:30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      text-decoration:none;
+      z-index:100;
+      transition: transform 0.2s ease;
+    }
+    .cta-cotiza:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg,#c75632,#982f52);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="galaxy-header">
+    <img src="logo-infinito.png" alt="Logo Infinito 8">
+    <h1>Comercializadora Infinito ∞</h1>
+    <p>Todo en papelería y oficina - Tu proveedor de confianza</p>
+  </header>
+
+  <nav>
+    <a href="#">Inicio</a>
+    <a href="#productos">Productos</a>
+    <a href="#catalogos">Catálogos</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <!-- Página en construcción -->
+  <section class="construccion">
+    🚧👷‍♂️🔧 Página en construcción.  
+    ¡Muy pronto más sorpresas para ti! ✨📚🖊️
+  </section>
+
+  <section class="hero">
+    <h1>Bienvenido a Infinito ∞</h1>
+    <p>Calidad, atención, servicio y honestidad desde 2024</p>
+  </section>
+
+  <!-- Productos carrusel -->
+  <section id="productos" class="productos-container">
+    <div class="productos">
+      <div class="producto"><img src="img/plumas.png"><h3>Plumas BIC</h3><p>Paquete de 12 piezas</p></div>
+      <div class="producto"><img src="img/cuaderno.webp"><h3>Cuaderno Norma</h3><p>100 hojas rayadas</p></div>
+      <div class="producto"><img src="img/hojas.webp"><h3>Hojas Xerox</h3><p>Caja de 5000 hojas</p></div>
+      <div class="producto"><img src="img/lapices.png"><h3>Lápices Mongol</h3><p>Paquete de 12</p></div>
+      <div class="producto"><img src="img/engrapadora.jpeg"><h3>Engrapadora</h3><p>Hasta 20 hojas</p></div>
+      <div class="producto"><img src="img/folders.jpeg"><h3>Folders</h3><p>Paquete con 25</p></div>
+      <div class="producto"><img src="img/perforadora.webp"><h3>Perforadora</h3><p>2 huecos</p></div>
+      <div class="producto"><img src="img/calculadora.jpeg"><h3>Calculadora</h3><p>240 funciones</p></div>
+      <div class="producto"><img src="img/clips.jpeg"><h3>Clips</h3><p>Paquete con 100</p></div>
+      <div class="producto"><img src="img/notas.jpeg"><h3>Notas Adhesivas</h3><p>Colores fluorescentes</p></div>
+      <!-- duplicados para loop -->
+      <div class="producto"><img src="img/plumas.png"><h3>Plumas BIC</h3><p>Paquete de 12 piezas</p></div>
+      <div class="producto"><img src="img/cuaderno.webp"><h3>Cuaderno Norma</h3><p>100 hojas rayadas</p></div>
+      <div class="producto"><img src="img/hojas.webp"><h3>Hojas Xerox</h3><p>Caja de 5000 hojas</p></div>
+      <div class="producto"><img src="img/lapices.png"><h3>Lápices Mongol</h3><p>Paquete de 12</p></div>
+      <div class="producto"><img src="img/engrapadora.jpeg"><h3>Engrapadora</h3><p>Hasta 20 hojas</p></div>
+      <div class="producto"><img src="img/folders.jpeg"><h3>Folders</h3><p>Paquete con 25</p></div>
+      <div class="producto"><img src="img/perforadora.webp"><h3>Perforadora</h3><p>2 huecos</p></div>
+      <div class="producto"><img src="img/calculadora.jpeg"><h3>Calculadora</h3><p>240 funciones</p></div>
+      <div class="producto"><img src="img/clips.jpeg"><h3>Clips</h3><p>Paquete con 100</p></div>
+      <div class="producto"><img src="img/notas.jpeg"><h3>Notas Adhesivas</h3><p>Colores fluorescentes</p></div>
+    </div>
+  </section>
+
+  <!-- Catálogos -->
+  <section id="catalogos" class="catalogos">
+    <h2>Descarga nuestro catálogo</h2>
+    <a class="catalogo-btn" href="Catalogo_General.pdf" download>🚧 Catálogo en construcción 🚧</a>
+
+    <div class="marcas">
+      <div class="track">
+        <img src="img/marca-norma.png" alt="Norma">
+        <img src="img/marca-maped.png" alt="Maped">
+        <img src="img/marca-barrilito.png" alt="Barrilito">
+        <img src="img/marca-bic.png" alt="Bic">
+        <img src="img/marca-scribe.png" alt="Scribe">
+        <img src="img/marca-pilot.png" alt="Pilot">
+        <img src="img/marca-crayola.png" alt="Crayola">
+        <!-- duplicados -->
+        <img src="img/marca-norma.png" alt="Norma">
+        <img src="img/marca-maped.png" alt="Maped">
+        <img src="img/marca-barrilito.png" alt="Barrilito">
+        <img src="img/marca-bic.png" alt="Bic">
+        <img src="img/marca-scribe.png" alt="Scribe">
+        <img src="img/marca-pilot.png" alt="Pilot">
+        <img src="img/marca-crayola.png" alt="Crayola">
+      </div>
+    </div>
+  </section>
+
+  <!-- Página en construcción -->
+  <section class="construccion">
+    🚧👷‍♂️🔧 Página en construcción.  
+    ¡Muy pronto más sorpresas para ti! ✨📚🖊️
+  </section>
+
+  <footer id="contacto">
+    <p>📍 C.P. 45130, Zapopan, Jalisco, México</p>
+    <p>📞 Tel: 33 4371 9038</p>
+    <p>📧 8.infinito.comercializadora@gmail.com</p>
+    <p>© 2024 Comercializadora Infinito ∞</p>
+  </footer>
+
+  <!-- Botón flotante de WhatsApp -->
+  <a href="https://wa.me/5213343719038?text=Hola%20quiero%20más%20información%20sobre%20sus%20productos%20porfavor" class="whatsapp-float" target="_blank">
+    <svg viewBox="0 0 32 32">
+      <path d="M16 .396c-8.817 0-15.956 7.139-15.956 15.956 0 2.812.733 5.555 2.129 7.972l-2.262 8.276 
+      8.456-2.219c2.347 1.285 4.995 1.964 7.633 1.964h.001c8.816 0 15.955-7.139 
+      15.955-15.956 0-4.265-1.66-8.276-4.677-11.293s-7.028-4.674-11.279-4.674zM16 
+      29.844c-2.312 0-4.58-.623-6.56-1.803l-.471-.279-5.017 1.317 
+      1.34-4.909-.307-.505c-1.27-2.089-1.941-4.493-1.941-6.909 0-7.255 
+      5.905-13.16 13.16-13.16 3.517 0 6.822 1.37 9.304 3.852s3.856 5.787 
+      3.856 9.308c0 7.255-5.905 13.16-13.164 13.16zM23.438 
+      19.473c-.401-.2-2.366-1.165-2.733-1.297-.367-.133-.635-.2-.902.2-.267.401-1.033 
+      1.297-1.267 1.564-.233.267-.467.3-.868.1s-1.693-.623-3.225-1.987c-1.192-1.065-1.997-2.385-2.231-2.786-.233-.4-.025-.616.175-.816.179-.178.401-.467.601-.7.2-.233.267-.401.401-.668.133-.267.067-.5-.033-.7-.1-.2-.902-2.178-1.235-2.982-.325-.783-.658-.676-.902-.689l-.768-.014c-.233 0-.7.1-1.067.5s-1.4 1.368-1.4 3.334 1.433 3.868 1.633 4.134c.2.267 2.823 4.305 6.84 6.027.956.412 1.7.659 2.279.845.958.305 1.829.262 2.516.159.767-.114 2
